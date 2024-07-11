@@ -64,3 +64,25 @@ end
 word = "Ἀγαμέμνων"
 
 loopOcc(word)
+
+using FuzzyMatch
+
+# Function to find matches with 90% or greater similarity
+function find_matches(database::Vector{String}, target::String, threshold::Float64=0.9)
+    matches = []
+    for word in database
+        similarity = ratio(word, target)
+        if similarity / 100.0 >= threshold
+            push!(matches, word)
+        end
+    end
+    return matches
+end
+
+# Example usage
+database = ["hello", "world", "helloo", "hell", "hero", "help"]
+target_word = "hello"
+matches = find_matches(database, target_word)
+
+println("Matches with 90% or greater similarity to '$target_word':")
+println(matches)

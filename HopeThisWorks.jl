@@ -67,7 +67,7 @@ word = "Ἀγαμέμνων"
 loopOcc(word)
 
 
-
+# We may have to "unlock" threshold and be able to change it when we call this method to adjust based on the length of the word.
 # Function to find matches with 90% or greater similarity
 function doesMatch(database::String, target::String, threshold::Float64=0.8)
     metric = DamerauLevenshtein()
@@ -76,8 +76,8 @@ function doesMatch(database::String, target::String, threshold::Float64=0.8)
         max_length = max(length(word), length(target))
         similarity = 1 - distance / max_length
         if similarity >= threshold
-            return true
+            return false
         end
     end
-    return false
+    return true
 end

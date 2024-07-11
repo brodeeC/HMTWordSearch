@@ -1,14 +1,15 @@
 md""" I really hope this works."""
+
 begin
-	using PlutoUI
-	using CitableBase
-	using CitableText
-	using CitableCorpus
-	using PolytonicGreek
-	using Unicode
-	using SplitApplyCombine
+    using PlutoUI
+    using CitableBase
+    using CitableText
+    using CitableCorpus
+    using PolytonicGreek
+    using Unicode
+    using SplitApplyCombine
+    using HmtArchive, HmtArchive.Analysis
 end
-using HmtArchive, HmtArchive.Analysis
 
 src = hmt_cex()
 

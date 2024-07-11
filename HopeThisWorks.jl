@@ -9,6 +9,7 @@ begin
     using Unicode
     using SplitApplyCombine
     using HmtArchive, HmtArchive.Analysis
+    using StringDistances
 end
 
 src = hmt_cex()
@@ -65,24 +66,18 @@ word = "Ἀγαμέμνων"
 
 loopOcc(word)
 
-using FuzzyMatch
+
 
 # Function to find matches with 90% or greater similarity
-function find_matches(database::Vector{String}, target::String, threshold::Float64=0.9)
-    matches = []
+function doesMatch(database::String, target::String, threshold::Float64=0.8)
+    metric = DamerauLevenshtein()
     for word in database
-        similarity = ratio(word, target)
-        if similarity / 100.0 >= threshold
-            push!(matches, word)
+        distance = evaluate(metric, word, target)
+        max_length = max(length(word), length(target))
+        similarity = 1 - distance / max_length
+        if similarity >= threshold
+            return true
         end
     end
-    return matches
+    return false
 end
-
-# Example usage
-database = ["hello", "world", "helloo", "hell", "hero", "help"]
-target_word = "hello"
-matches = find_matches(database, target_word)
-
-println("Matches with 90% or greater similarity to '$target_word':")
-println(matches)

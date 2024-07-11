@@ -8,3 +8,7 @@
     c. Titles/Lemma/Commentary
 2. How do we want to handle invalid input
 3. Design it so the pluto notebook inputs the word and it outputs into an HTML file.
+
+07/11
+- added a function to check the similarity between words given a threshold percentage.
+- started creating functions to strengthen our search and give the user more of an opportunity to refine the search.

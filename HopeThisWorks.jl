@@ -1,5 +1,7 @@
 md""" I really hope this works."""
 
+word = "Ἀγαμέμνων"
+
 begin
     using PlutoUI
     using CitableBase
@@ -62,7 +64,7 @@ end
 
 
 
-word = "Ἀγαμέμνων"
+
 
 loopOcc(word)
 

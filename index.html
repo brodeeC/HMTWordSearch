@@ -20,6 +20,7 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         input[type="text"] {
             width: 300px;
@@ -38,15 +39,21 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .results {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
 <div class="search-container">
     <form id="searchForm">
-        <input type="text" id="searchBox" placeholder="Search The Iliad...">
+        <input type="text" id="searchBox" name="term" placeholder="Search The Iliad...">
         <input type="submit" value="Search">
     </form>
+    <div class="results" id="searchResults">
+        <!-- Search results will be displayed here dynamically -->
+    </div>
 </div>
 
 <script>
@@ -56,8 +63,19 @@
         fetch(`/search?term=${encodeURIComponent(searchTerm)}`)
             .then(response => response.json())
             .then(data => {
-                alert(`Search results: ${JSON.stringify(data)}`);
+                displaySearchResults(data);
             });
+    }
+
+    function displaySearchResults(results) {
+        const resultsContainer = document.getElementById('searchResults');
+        resultsContainer.innerHTML = ''; // Clear previous results
+        for (let urn in results) {
+            const count = results[urn];
+            const resultItem = document.createElement('div');
+            resultItem.textContent = `URN: ${urn}, Count: ${count}`;
+            resultsContainer.appendChild(resultItem);
+        }
     }
 </script>
 

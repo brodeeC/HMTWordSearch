@@ -4,23 +4,40 @@
   <meta charset="UTF-8">
   <title>Iliadic Search</title>
   <style>
-    /* Styles as you have defined */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f0f0; /* Light gray background */
+      color: #333; /* Dark gray text */
+      margin: 0;
+      padding: 0;
+    }
+    
+    h1 {
+      color: #3498db; /* Blue heading */
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    #searchForm {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    #searchForm label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #555; /* Dark gray label */
+    }
+    
     #searchTermInput {
       padding: 10px;
       font-size: 16px;
       border: 2px solid #3498db;
       border-radius: 5px;
-      width: 200px;
+      width: 300px;
       margin-right: 10px;
-    }
-    
-    /* Additional styles for clarity */
-    #searchForm {
-      margin-top: 20px;
-    }
-    
-    #searchForm label {
-      font-weight: bold;
+      color: #555; /* Dark gray text */
     }
     
     #searchForm button {
@@ -31,10 +48,11 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease; /* Smooth hover transition */
     }
     
     #searchForm button:hover {
-      background-color: #2980b9;
+      background-color: #2980b9; /* Darker blue on hover */
     }
   </style>
   <script>
@@ -60,33 +78,33 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ query: searchTerm }) // Ensure consistent key with server-side expectation  
-          });
+          body: JSON.stringify({ query: searchTerm })
+        });
 
         if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-                
         // Redirect to results page with encoded search results
         const result = await response.text();
         localStorage.setItem('searchResults', result);
         window.location.href = '/results.html';
 
-        } catch (error) {
-            console.error('Error processing search:', error);
-            // ... display an error message to the user
-        };
-        
+      } catch (error) {
+        console.error('Error processing search:', error);
+        // ... display an error message to the user
+      }
     }
   </script>
 </head>
 <body>
   <h1>Iliadic Search</h1>
   <form id="searchForm" onsubmit="handleSearch(event)">
-    <label for="searchTermInput">Search Term:</label>
-    <input type="text" id="searchTermInput" name="searchTerm" key = "query">
+    <label for="searchTermInput">Enter Search Term in Ancient Greek:</label>
+    <input type="text" id="searchTermInput" name="searchTerm" placeholder="E.g., θεὰ, Ἀχιλῆος">
     <button type="submit">Search</button>
+    <label>Program will search the Iliad and count all instances of your word</label>
+    <a href="https://www.homermultitext.org/facsimile/">Link to the Homeric Multitext Project</a>
   </form>
 </body>
 </html>

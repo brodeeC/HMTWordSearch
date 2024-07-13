@@ -33,3 +33,5 @@
 07/13
 - I'm still working on getting the interface between Julia and HTML set up, it's very odd
 - That took a while, but the html and Julia finally got along and the webpage works, now we just need our search functions... I think anyways, the results aren't displaying, it says they're undefined so we'll see what happens.
+- okay so now the pages load, the result is in there, now all we need to do is finish making it more appealing to use
+- changed some colors, fonts, and the layout, it looks pretty good, want to edit a couple of things about it but overall I'm very happy with today's progress!

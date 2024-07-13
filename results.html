@@ -3,6 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>Search Results</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f0f0; /* Light gray background */
+      color: #333; /* Dark gray text */
+      margin: 0;
+      padding: 0;
+      text-align: center; /* Center align text */
+    }
+    
+    h1 {
+      color: #3498db; /* Blue heading */
+      margin-top: 20px;
+    }
+    
+    #resultsContainer {
+      background-color: #fff; /* White background */
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px; /* Smaller width */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Light shadow */
+    }
+    
+    #resultsContainer p {
+      line-height: 1.6;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Smooth hover transition */
+      margin-top: 10px; /* Adjusted margin */
+      display: block;
+      margin: 20px auto 0; /* Centered with space above */
+    }
+    
+    button:hover {
+      background-color: #2980b9; /* Darker blue on hover */
+    }
+  </style>
   <script>
     window.onload = function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -10,7 +56,7 @@
       const results = localStorage.getItem('searchResults');
   
       if (results) {
-        resultsContainer.innerText = results;
+        resultsContainer.innerHTML = results; // Use innerHTML to render HTML content
       } else {
         resultsContainer.innerText = 'No results found';
       }

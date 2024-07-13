@@ -6,8 +6,14 @@
   <script>
     window.onload = function() {
       const urlParams = new URLSearchParams(window.location.search);
-      const results = urlParams.get('results');
-      document.getElementById('resultsContainer').innerText = results || 'No results found';
+      const resultsContainer = document.getElementById('resultsContainer');
+      const results = localStorage.getItem('searchResults');
+  
+      if (results) {
+        resultsContainer.innerText = results;
+      } else {
+        resultsContainer.innerText = 'No results found';
+      }
     };
   </script>
 </head>

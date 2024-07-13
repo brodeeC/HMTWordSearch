@@ -67,11 +67,11 @@
               throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        
-        const result = await response.json();
-        
+                
         // Redirect to results page with encoded search results
-        window.location.href = `/results.html?results=${encodeURIComponent(result.results)}`;
+        const result = await response.text();
+        localStorage.setItem('searchResults', result);
+        window.location.href = '/results.html';
 
         } catch (error) {
             console.error('Error processing search:', error);

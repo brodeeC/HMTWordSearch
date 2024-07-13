@@ -69,21 +69,19 @@ end
 
 
 route("/search", method = POST) do
-    request = Genie.Requests.request()
     try
-        payload = jsonpayload(request)
-        #search_query = get(payload, "query", "")
-        search_query = jsonpayload()["name"]
+        search_query = jsonpayload()["query"]
         
         if isempty(search_query)
-            return JSON.json(Dict("error" => "Search query cannot be empty"))
+            return HTTP.Response(400, "Search query cannot be empty")
         end
         
         results = search_ancient_greek(search_query)
         
-        return JSON.json(Dict("results" => results))
+        return HTTP.Response(200, [("Content-Type", "text/plain")], string(results))
     catch err
-        return JSON.json(Dict("error" => "Error processing request: $err"))
+        @error "Error processing request: $err"
+        return HTTP.Response(500, "Error processing request: $err")
     end
 end
 

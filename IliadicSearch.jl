@@ -16,6 +16,7 @@ begin
     using HTTP
     using HTTP.URIs
     using JSON
+    using JSON3
 end
 
 src = hmt_cex()
@@ -43,26 +44,49 @@ function search_ancient_greek(term::String)
     return results
 end
 
-# Define route to serve index.html
-route("/search", method = GET) do
-    html_content = read(joinpath(@__DIR__, "..", "frontend", "assets", "index.html"), String)
-    return html_content
+
+
+
+# Define the routes using the route macro correctly
+route("/", method = GET) do
+    try
+        html_content = read(joinpath(@__DIR__, "public", "index.html"), String)  # Read the HTML file content
+        return HTTP.Response(200, [("Content-Type", "text/html")], html_content)
+    catch e
+        return HTTP.Response(500, "Error rendering HTML view: $e")
+    end
 end
 
-# Define the search route
+route("/results.html", method = GET) do
+    try
+        html_content = read(joinpath(@__DIR__, "public", "results.html"), String)
+        return HTTP.Response(200, [("Content-Type", "text/html")], html_content)
+    catch e
+        return HTTP.Response(500, "Error rendering HTML view: $e")
+    end
+end
+
+
+
 route("/search", method = POST) do
-    #req = Genie.Requests.request()
-    #body = String(req.body)
-    #payload = JSON.parse(body)
-    #term = payload["term"]
-    determ = Genie.Requests.request()[:params]["term"]
-    term = unescapeuri(determ)
-    results = search_ancient_greek(term)
-    return HTTP.Response(200, JSON.json(results))
-    
+    request = Genie.Requests.request()
+    try
+        payload = jsonpayload(request)
+        #search_query = get(payload, "query", "")
+        search_query = jsonpayload()["name"]
+        
+        if isempty(search_query)
+            return JSON.json(Dict("error" => "Search query cannot be empty"))
+        end
+        
+        results = search_ancient_greek(search_query)
+        
+        return JSON.json(Dict("results" => results))
+    catch err
+        return JSON.json(Dict("error" => "Error processing request: $err"))
+    end
 end
 
-# Export the router
-export router
 
-end # module
+export router
+end

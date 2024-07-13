@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Results</title>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const results = urlParams.get('results');
+      document.getElementById('resultsContainer').innerText = results || 'No results found';
+    };
+  </script>
+</head>
+<body>
+  <h1>Search Results</h1>
+  <div id="resultsContainer"></div>
+  <button onclick="window.location.href='/'">Back</button>
+</body>
+</html>

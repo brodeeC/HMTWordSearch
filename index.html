@@ -1,106 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iliadic Search</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+  <meta charset="UTF-8">
+  <title>Iliadic Search</title>
+  <style>
+    /* Styles as you have defined */
+    #searchTermInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      width: 200px;
+      margin-right: 10px;
+    }
+    
+    /* Additional styles for clarity */
+    #searchForm {
+      margin-top: 20px;
+    }
+    
+    #searchForm label {
+      font-weight: bold;
+    }
+    
+    #searchForm button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    #searchForm button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+  <script>
+    async function handleSearch(event) {
+      event.preventDefault();
+      
+      const searchTermInput = document.getElementById("searchTermInput");
+      if (!searchTermInput) {
+        console.error('Element with ID "searchTermInput" not found.');
+        return;
+      }
+      
+      const searchTerm = searchTermInput.value.trim(); // Trim whitespace
+      
+      if (searchTerm === "") {
+        console.error('Search term is empty.');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query: searchTerm }) // Ensure consistent key with server-side expectation  
+          });
+
+        if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        .search-container {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            padding: 10px 20px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .results-container {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-    </style>
+
+        
+        const result = await response.json();
+        
+        // Redirect to results page with encoded search results
+        window.location.href = `/results.html?results=${encodeURIComponent(result.results)}`;
+
+        } catch (error) {
+            console.error('Error processing search:', error);
+            // ... display an error message to the user
+        };
+        
+    }
+  </script>
 </head>
 <body>
-
-<div class="search-container">
-    <form action="/search" method="POST" enctype="multipart/form-data" id="searchForm">
-        <input type="text" id="searchBox" name="term" value="" placeholder="Search The Iliad...">
-        <input type="submit" value="Search">
-    </form>
-</div>
-
-<div class="results-container" id="searchResults">
-    <!-- Search results will be displayed here dynamically -->
-</div>
-
-
-<script>
-    document.getElementById('searchForm').onsubmit = function(event) {
-        event.preventDefault();
-        const searchTerm = document.getElementById('searchBox').value;
-
-        fetch(`/search`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ term: searchTerm })
-        })
-        .then(response => response.json())
-        .then(data => {
-            displaySearchResults(data);  // Call function to display results
-        })
-        .catch(error => {
-            console.error('Error fetching search results:', error);
-        });
-    }
-
-    function displaySearchResults(results) {
-        const resultsContainer = document.getElementById('searchResults');
-        resultsContainer.innerHTML = '';  // Clear previous results
-
-        if (results !== 0) {
-            const resultElement = document.createElement('p');
-            resultElement.textContent = `Search results: ${results}`;
-            resultsContainer.appendChild(resultElement);
-        } else {
-            resultsContainer.textContent = 'No results found.';
-        }
-    }
-</script>
-    
-    
-
-    
-
+  <h1>Iliadic Search</h1>
+  <form id="searchForm" onsubmit="handleSearch(event)">
+    <label for="searchTermInput">Search Term:</label>
+    <input type="text" id="searchTermInput" name="searchTerm" key = "query">
+    <button type="submit">Search</button>
+  </form>
 </body>
 </html>

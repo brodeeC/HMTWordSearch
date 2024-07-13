@@ -29,3 +29,7 @@
     4. Now you'll need to either import the files I added to the github, or copy paste the chat into the files you create
 - Now you should have it structured the same way I do
 - We'll still use this file for now and make the same changes to the same files we edit on our own versions
+
+07/13
+- I'm still working on getting the interface between Julia and HTML set up, it's very odd
+- 

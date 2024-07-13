@@ -35,3 +35,14 @@
 - That took a while, but the html and Julia finally got along and the webpage works, now we just need our search functions... I think anyways, the results aren't displaying, it says they're undefined so we'll see what happens.
 - okay so now the pages load, the result is in there, now all we need to do is finish making it more appealing to use
 - changed some colors, fonts, and the layout, it looks pretty good, want to edit a couple of things about it but overall I'm very happy with today's progress!
+
+
+### Notes for Sunday Meetup
+- You are so amazing, like holy cow you made a full on working web page!!! T^T
+- What if we added a link called "Something" that just links to a rick roll XD
+- I am totally taking this seriously.
+- What if the first link is a cat vid and then we add another link called "Something Else" thats the rick roll?
+     [Something](https://www.youtube.com/watch?v=FEHSMnoHIXQ&pp=ygURY2F0IHZpZGVvcyBmdW5ueSA%3D)
+     [Something Else](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+- Maybe we can add a link to the Lexicon? So people can look up the word and its many possible meanings?
+     [Lexicon](http://folio2.furman.edu/lsj/index.html)

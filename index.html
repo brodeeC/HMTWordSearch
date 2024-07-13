@@ -21,6 +21,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 20px;
         }
         input[type="text"] {
             width: 300px;
@@ -39,45 +40,67 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .results {
-            margin-top: 20px;
+        .results-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
 <div class="search-container">
-    <form id="searchForm">
-        <input type="text" id="searchBox" name="term" placeholder="Search The Iliad...">
+    <form action="/search" method="POST" enctype="multipart/form-data" id="searchForm">
+        <input type="text" id="searchBox" name="term" value="" placeholder="Search The Iliad...">
         <input type="submit" value="Search">
     </form>
-    <div class="results" id="searchResults">
-        <!-- Search results will be displayed here dynamically -->
-    </div>
 </div>
+
+<div class="results-container" id="searchResults">
+    <!-- Search results will be displayed here dynamically -->
+</div>
+
 
 <script>
     document.getElementById('searchForm').onsubmit = function(event) {
         event.preventDefault();
         const searchTerm = document.getElementById('searchBox').value;
-        fetch(`/search?term=${encodeURIComponent(searchTerm)}`)
-            .then(response => response.json())
-            .then(data => {
-                displaySearchResults(data);
-            });
+
+        fetch(`/search`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ term: searchTerm })
+        })
+        .then(response => response.json())
+        .then(data => {
+            displaySearchResults(data);  // Call function to display results
+        })
+        .catch(error => {
+            console.error('Error fetching search results:', error);
+        });
     }
 
     function displaySearchResults(results) {
         const resultsContainer = document.getElementById('searchResults');
-        resultsContainer.innerHTML = ''; // Clear previous results
-        for (let urn in results) {
-            const count = results[urn];
-            const resultItem = document.createElement('div');
-            resultItem.textContent = `URN: ${urn}, Count: ${count}`;
-            resultsContainer.appendChild(resultItem);
+        resultsContainer.innerHTML = '';  // Clear previous results
+
+        if (results !== 0) {
+            const resultElement = document.createElement('p');
+            resultElement.textContent = `Search results: ${results}`;
+            resultsContainer.appendChild(resultElement);
+        } else {
+            resultsContainer.textContent = 'No results found.';
         }
     }
 </script>
+    
+    
+
+    
 
 </body>
 </html>

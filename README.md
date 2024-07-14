@@ -35,3 +35,45 @@
 - That took a while, but the html and Julia finally got along and the webpage works, now we just need our search functions... I think anyways, the results aren't displaying, it says they're undefined so we'll see what happens.
 - okay so now the pages load, the result is in there, now all we need to do is finish making it more appealing to use
 - changed some colors, fonts, and the layout, it looks pretty good, want to edit a couple of things about it but overall I'm very happy with today's progress!
+
+## Tutorial on running Julia from command line
+1. Open command line (terminal)
+2. Copy this command into the terminal and hit enter: export PATH="$PATH:/Applications/Julia-1.9.app/Contents/Resources/julia/bin"
+3. Copy this command into the terminal and hit enter: source ~/.zshrc
+4. Now you should be able to type `julia` into the terminal and julia should start
+
+## Tutorial on how to setup and run Genie
+1. Open cmd line and ensure you can start Julia from it. 
+2. Exit out of julia if you started it, but don't close the command line.
+3. Enter command: mkdir IliadicSearch
+4. Enter command: cd IliadicSearch
+5. mkdir -p src/public config
+6. Now you should have a folder on your computer named Iliadic Search and it should have 2 folders in it: src and config, inside src should be the public folder. 
+7. Now, open the IliadicSearch folder in VSCode.
+8. Add in the appropriate files, here's what the structure should look like.
+
+IliadicSearch
+-config
+    -routes.jl
+-src
+    -public
+        -index.html
+        -results.html
+    -IliadicSearch.jl
+-Manifest.toml
+-Project.toml
+-start_server.jl
+
+9. Now that you have all the files and the appropriate structure, copy/past all the code from the corresponding files in this GitHub!
+10. Now, back to the terminal, at the top of the window it should show that we are looking inside of the IliadicSearch folder.
+11. Next, enter the command: julia -e 'using Pkg; Pkg.activate("."); Pkg.add("Genie")'
+12. Now Julia should be running inside the IliadicSearch folder.
+13. All that's left is to open the Genie Server!
+14. Enter the command: include("start_server.jl")
+    - This will only work if Julia is running inside the folder
+15. Wait a moment and you should see WARNING: replacing module IliadicSearch.
+    [ Info: Starting Genie server...
+    ┌ Info: 
+    └ Web Server starting at http://127.0.0.1:8000 - press Ctrl/Cmd+C to stop the server.
+15a. Once you see this pop up the server is in business!
+16. Finally, go to your web browser of choice and enter 127.0.0.1:8000 into the search bar!

@@ -54,9 +54,10 @@
       const urlParams = new URLSearchParams(window.location.search);
       const resultsContainer = document.getElementById('resultsContainer');
       const results = localStorage.getItem('searchResults');
+      const term = localStorage.getItem('term');
   
       if (results) {
-        resultsContainer.innerHTML = results; // Use innerHTML to render HTML content
+        resultsContainer.innerHTML = "There are " + results + " for the word " + term; // Use innerHTML to render HTML content
       } else {
         resultsContainer.innerText = 'No results found';
       }
@@ -67,5 +68,6 @@
   <h1>Search Results</h1>
   <div id="resultsContainer"></div>
   <button onclick="window.location.href='/'">Back</button>
+  <a href="http://folio2.furman.edu/lsj/index.html">Link to the LSJ Lexicon!</a>
 </body>
 </html>

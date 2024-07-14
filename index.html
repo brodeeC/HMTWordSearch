@@ -88,6 +88,7 @@
         // Redirect to results page with encoded search results
         const result = await response.text();
         localStorage.setItem('searchResults', result);
+        localStorage.setItem('term', searchTerm)
         window.location.href = '/results.html';
 
       } catch (error) {
@@ -105,6 +106,8 @@
     <button type="submit">Search</button>
     <label>Program will search the Iliad and count all instances of your word</label>
     <a href="https://www.homermultitext.org/facsimile/">Link to the Homeric Multitext Project</a>
+    <a href="https://www.youtube.com/watch?v=FEHSMnoHIXQ&pp=ygURY2F0IHZpZGVvcyBmdW5ueSA%3D">Link to something awesome!</a>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Link to something even awesomer!!</a>
   </form>
 </body>
 </html>

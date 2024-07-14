@@ -77,3 +77,14 @@ IliadicSearch
     └ Web Server starting at http://127.0.0.1:8000 - press Ctrl/Cmd+C to stop the server.
 15a. Once you see this pop up the server is in business!
 16. Finally, go to your web browser of choice and enter 127.0.0.1:8000 into the search bar!
+
+
+### Notes for Sunday Meetup
+- You are so amazing, like holy cow you made a full on working web page!!! T^T
+- What if we added a link called "Something" that just links to a rick roll XD
+- I am totally taking this seriously.
+- What if the first link is a cat vid and then we add another link called "Something Else" thats the rick roll?
+- [Something](https://www.youtube.com/watch?v=FEHSMnoHIXQ&pp=ygURY2F0IHZpZGVvcyBmdW5ueSA%3D)
+- [Something Else](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+- Maybe we can add a link to the Lexicon? So people can look up the word and its many possible meanings?
+- [Lexicon](http://folio2.furman.edu/lsj/index.html)

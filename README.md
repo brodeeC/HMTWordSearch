@@ -88,3 +88,7 @@ IliadicSearch
 - [Something Else](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 - Maybe we can add a link to the Lexicon? So people can look up the word and its many possible meanings?
 - [Lexicon](http://folio2.furman.edu/lsj/index.html)
+- 
+
+### Another weekend that he says "do something"
+- Add more search methods and display them in the results.

@@ -53,16 +53,16 @@
 8. Add in the appropriate files, here's what the structure should look like.
 
 IliadicSearch
--config
-    -routes.jl
--src
-    -public
-        -index.html
-        -results.html
-    -IliadicSearch.jl
--Manifest.toml
--Project.toml
--start_server.jl
+- config
+    - routes.jl
+- src
+    - public
+        - index.html
+        - results.html
+    - IliadicSearch.jl
+- Manifest.toml
+- Project.toml
+- start_server.jl
 
 9. Now that you have all the files and the appropriate structure, copy/past all the code from the corresponding files in this GitHub!
 10. Now, back to the terminal, at the top of the window it should show that we are looking inside of the IliadicSearch folder.

@@ -56,9 +56,14 @@
       const results = localStorage.getItem('searchResults');
       const term = localStorage.getItem('term');
   
-      if (results) {
-        resultsContainer.innerHTML = "There are " + results + " for the word " + term; // Use innerHTML to render HTML content
-      } else {
+      if (results > 1) {
+        resultsContainer.innerHTML = "There are " + results + " instances of the word " + term; // Use innerHTML to render HTML content
+      
+      } 
+      else if (results == 1){
+        resultsContainer.innerHTML = "There is " + results + " instance of the word " + term; // Use innerHTML to render HTML content
+      }
+      else {
         resultsContainer.innerText = 'No results found';
       }
     };
